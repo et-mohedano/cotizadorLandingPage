@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cotizador de Landing Page en MXN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Cotizador de Landing Page en MXN</h1>
+        <form id="quoteForm" class="needs-validation" novalidate>
+            <fieldset class="mb-3">
+                <legend>Servicios Requeridos:</legend>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="design" name="service" value="design">
+                    <label class="form-check-label" for="design">Diseño de sitio web (10 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="development" name="service" value="development">
+                    <label class="form-check-label" for="development">Desarrollo de sitio web (16 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="design_development" name="service" value="design_development">
+                    <label class="form-check-label" for="design_development">Diseño y desarrollo combinado (26 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="graphic_identity" name="service" value="graphic_identity">
+                    <label class="form-check-label" for="graphic_identity">Diseño de identidad gráfica (8 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="marketing_strategy" name="service" value="marketing_strategy">
+                    <label class="form-check-label" for="marketing_strategy">Estrategia de marketing y promoción (6 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="leads_tracking" name="service" value="leads_tracking">
+                    <label class="form-check-label" for="leads_tracking">Captura, análisis y seguimiento de leads (6 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="integrations" name="service" value="integrations">
+                    <label class="form-check-label" for="integrations">Integración de redes sociales y/u otros sistemas (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="traffict_analysis" name="service" value="traffict_analysis">
+                    <label class="form-check-label" for="traffict_analysis">Análisis y reportes de tráfico (3 horas)</label>
+                </div>
+                <div class="mb-3">
+                    <label for="other" class="form-label">Otro: (horas)</label>
+                    <input type="number" class="form-control" id="other" name="service">
+                </div>
+            </fieldset>
+    
+            <fieldset class="mb-3">
+                <legend>Secciones Adicionales del Sitio:</legend>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="about_us" name="section" value="about_us">
+                    <label class="form-check-label" for="about_us">Quienes somos (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="services" name="section" value="services">
+                    <label class="form-check-label" for="services">Servicios (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="products" name="section" value="products">
+                    <label class="form-check-label" for="products">Productos (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="contact" name="section" value="contact">
+                    <label class="form-check-label" for="contact">Buzón de contacto (1 hora)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="faq" name="section" value="faq">
+                    <label class="form-check-label" for="faq">FAQ (Preguntas Frecuentes) (1 hora)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="quotes" name="section" value="quotes">
+                    <label class="form-check-label" for="quotes">Testimonios (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="portfolio" name="section" value="portfolio">
+                    <label class="form-check-label" for="portfolio">Portafolio (3 horas)</label>
+                </div>
+            </fieldset>
+    
+            <fieldset class="mb-3">
+                <legend>Funcionalidades Adicionales:</legend>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="blog" name="additional" value="blog">
+                    <label class="form-check-label" for="blog">Blog (8 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="live_chat" name="additional" value="live_chat">
+                    <label class="form-check-label" for="live_chat">Chat en vivo (5 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="online_payments" name="additional" value="online_payments">
+                    <label class="form-check-label" for="online_payments">Pagos en línea (8 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="newsletter" name="additional" value="newsletter">
+                    <label class="form-check-label" for="newsletter">Boletín de noticias (8 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="seo" name="additional" value="seo">
+                    <label class="form-check-label" for="seo">Optimización para motores de búsqueda (SEO) (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="responsive" name="additional" value="responsive">
+                    <label class="form-check-label" for="responsive">Adaptabilidad móvil (diseño responsivo) (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="accesibility" name="additional" value="accesibility">
+                    <label class="form-check-label" for="accesibility">Funciones de accesibilidad para públicos diversos (2 horas)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="content" name="additional" value="content">
+                    <label class="form-check-label" for="content">Recomendaciones de actualización de contenido relacional referente a los clientes (1 hora)</label>
+                </div>
+            </fieldset>
+    
+            <fieldset class="mb-3">
+                <legend>Información Adicional:</legend>
+                <div class="mb-3">
+                    <label for="completionTime" class="form-label">Plazo estimado para la finalización del proyecto (en semanas):</label>
+                    <input type="number" class="form-control" id="completionTime" name="completionTime">
+                </div>
+                <div class="mb-3">
+                    <label for="domain" class="form-label">Dominio propio</label>
+                    <div>
+                        <input type="radio" class="btn-check" id="domain_yes" name="domain" value="yes" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="domain_yes">Sí</label>
+                        <input type="radio" class="btn-check" id="domain_no" name="domain" value="no" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="domain_no">No</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">¿Cuentas con algún servicio de hosting activo?</label>
+                    <div>
+                        <input type="radio" class="btn-check" id="hosting_yes" name="hosting" value="yes" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="hosting_yes">Sí</label>
+                        <input type="radio" class="btn-check" id="hosting_no" name="hosting" value="no" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="hosting_no">No</label>
+                    </div>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="corporate_emails" name="corporate_emails" value="yes">
+                    <label class="form-check-label" for="corporate_emails">¿Requieres correos corporativos?</label>
+                </div>
+                <div class="mb-3">
+                    <label for="activeTime" class="form-label">¿Por cuánto tiempo te gustaría tener el sitio activo? (en años):</label>
+                    <input type="number" class="form-control" id="activeTime" name="activeTime">
+                </div>
+            </fieldset>
+            <button type="button" onclick="calculateQuote()" class="btn btn-primary">Calcular Cotización</button>
+        </form>
+        <h2 class="mt-4">Cotización Estimada: $<span id="quoteResult">0</span> MXN</h2>
+        <div id="printSection" style="display:none;">
+            <h3>Desglose de la Cotización</h3>
+            <table class="table"  id="detailsTable">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los detalles de la cotización se llenarán desde JavaScript -->
+                </tbody>
+            </table>
+            <h3>Total + IVA (16%): $<span id="totalIVA">0</span> MXN</h3>
+            <button onclick="printDetails()" class="btn btn-secondary">Imprimir Cotización</button>
+        </div>
+    </div>
+    
+    <script src="quoteCalculator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+</body>
+</html>

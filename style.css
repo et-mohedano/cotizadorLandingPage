@@ -1,0 +1,113 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printSection, #printSection * {
+        visibility: visible;
+    }
+    #printSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    #printSection button {
+        display: none; 
+    }
+}
+
+:root {
+    --first-color: #9147fb;
+    --second-color: #765656;
+    --third-color: #e8e8e8;
+    --fourth-color: #1e1e1e;
+}
+
+*{
+    color: #fff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--fourth-color);
+    background: linear-gradient(270deg, #584444, var(--fourth-color));
+    background-size: 400% 400%;
+    /* animation: AnimationName 15s ease infinite; */
+    transition: background-position 0.2s linear;
+
+}
+
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+h1, h2, h3, legend {
+    /* color: var(--first-color); */
+}
+
+
+.form-control {
+    background-color: var(--third-color);
+    border: 1px solid var(--fourth-color);
+}
+
+.btn-primary {
+    background-color: var(--first-color);
+    border-color: var(--fourth-color);
+}
+
+.btn-secondary {
+    background-color: var(--second-color);
+    border-color: var(--first-color);
+}
+
+.btn-outline-primary {
+    color: var(--first-color);
+    border-color: var(--first-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--first-color);
+    color: var(--third-color);
+}
+
+.btn-check:checked + .btn-outline-primary,
+.btn-check:active + .btn-outline-primary,
+.btn-outline-primary.active,
+.btn-outline-primary.dropdown-toggle.show {
+    color: var(--third-color);
+    background-color: var(--first-color);
+}
+
+.table {
+    background-color: transparent;
+}
+
+.table th,
+.table td {
+    border-color: var(--fourth-color);
+}
+
+.table thead th {
+    background-color: var(--first-color);
+    color: var(--third-color);
+}
+
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 60%;
+    border: solid #fff 1px;
+    padding: 50px 80px;
+    border-radius: 16px;
+    background-color: var(--fourth-color);
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 90% !important;
+    }
+}
