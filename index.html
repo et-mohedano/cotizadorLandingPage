@@ -22,12 +22,8 @@
                     <label class="form-check-label" for="development">Desarrollo de sitio web (16 horas)</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="design_development" name="service" value="design_development">
-                    <label class="form-check-label" for="design_development">Diseño y desarrollo combinado (26 horas)</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="graphic_identity" name="service" value="graphic_identity">
-                    <label class="form-check-label" for="graphic_identity">Diseño de identidad gráfica (8 horas)</label>
+                    <input class="form-check-input" type="checkbox" id="design_graphic_identity" name="service" value="design_graphic_identity">
+                    <label class="form-check-label" for="design_graphic_identity">Diseño de identidad gráfica (8 horas)</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="marketing_strategy" name="service" value="marketing_strategy">
@@ -172,6 +168,20 @@
                     <!-- Los detalles de la cotización se llenarán desde JavaScript -->
                 </tbody>
             </table>
+            <div id="profileCostSection" class="mt-4">
+                <h3>Desglose de Costos por Perfil</h3>
+                <table class="table" id="profileCostsTable">
+                    <thead>
+                        <tr>
+                            <th>Perfil</th>
+                            <th>Costo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los detalles de costos por perfil se llenarán desde JavaScript -->
+                    </tbody>
+                </table>
+            </div>
             <h3>Total + IVA (16%): $<span id="totalIVA">0</span> MXN</h3>
             <button onclick="printDetails()" class="btn btn-secondary">Imprimir Cotización</button>
         </div>
