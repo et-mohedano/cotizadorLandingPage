@@ -96,18 +96,19 @@ h1, h2, h3, legend {
     color: var(--third-color);
 }
 
-.container {
+body #main-container {
     margin-top: 50px;
     margin-bottom: 50px;
-    max-width: 60%;
+    width: 90%;
     border: solid #fff 1px;
-    padding: 50px 80px;
+    padding: 20px;
     border-radius: 16px;
     background-color: var(--fourth-color);
 }
 
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 90% !important;
+@media (min-width: 756px) {
+    body #main-container {
+        width: 60%;
+        padding: 50px 80px;
     }
 }
