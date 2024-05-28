@@ -46,11 +46,7 @@ const corporateEmailCostPerYear = 500;
 
 function calculateQuote() {
     let totalCost = 0;
-    let profileCosts = {
-        designer: 0,
-        developer: 0,
-        business_developer: 0
-    };
+    let entries = []; // Para almacenar cada servicio y su costo para redistribución de utilidad
 
     let tableBody = document.querySelector('#detailsTable tbody');
     tableBody.innerHTML = '';  // Limpiar tabla antes de llenar
@@ -60,79 +56,82 @@ function calculateQuote() {
     if (otherHours > 0) {
         const cost = otherHours * hourlyRates.other;
         totalCost += cost;
-        profileCosts.other = cost; // Si se necesita trazar cuánto se calcula por "otro"
-        let row = `<tr><td>Otro (${otherHours} horas)</td><td>$${cost.toFixed(2)} MXN</td></tr>`;
-        tableBody.innerHTML += row;
+        entries.push({ label: "Otro (" + otherHours + " horas)", cost });
     }
 
     document.querySelectorAll('#quoteForm [name="service"]:checked').forEach(item => {
-        serviceHours.other = parseFloat(document.getElementById('other').value) || 0; // Actualizar las horas de 'Otro'
-        const profile = item.value.includes('design') ? 'designer' : 'developer';
-        const cost = serviceHours[item.value] * hourlyRates[profile];
-        profileCosts[profile] += cost;
+        const cost = serviceHours[item.value] * hourlyRates[item.value.includes('design') ? 'designer' : 'developer'];
         totalCost += cost;
-        let row = `<tr><td>${item.labels[0].innerText}</td><td>$${cost.toFixed(2)} MXN</td></tr>`;
-        tableBody.innerHTML += row;
+        entries.push({ label: item.labels[0].innerText, cost });
     });
 
     document.querySelectorAll('#quoteForm [name="section"]:checked').forEach(item => {
         const cost = sectionHours[item.value] * hourlyRates.designer;
-        profileCosts.designer += cost;
         totalCost += cost;
-        let row = `<tr><td>${item.labels[0].innerText}</td><td>$${cost.toFixed(2)} MXN</td></tr>`;
-        tableBody.innerHTML += row;
+        entries.push({ label: item.labels[0].innerText, cost });
     });
 
     document.querySelectorAll('#quoteForm [name="additional"]:checked').forEach(item => {
         const cost = additionalHours[item.value] * hourlyRates.developer;
-        profileCosts.developer += cost;
         totalCost += cost;
-        let row = `<tr><td>${item.labels[0].innerText}</td><td>$${cost.toFixed(2)} MXN</td></tr>`;
+        entries.push({ label: item.labels[0].innerText, cost });
+    });
+
+    const utilityRate = parseFloat(document.getElementById('utilityRate').value) || 40;
+    const utilityCost = totalCost * (utilityRate / 100);
+    totalCost += utilityCost;
+
+    entries.forEach(entry => {
+        let row = `<tr><td>${entry.label}</td><td>$${entry.cost.toFixed(2)} MXN</td></tr>`;
         tableBody.innerHTML += row;
     });
 
-    // Costos adicionales por perfil
-    for (const [profile, cost] of Object.entries(profileCosts)) {
-        let row = `<tr><td>Total ${profile}</td><td>$${cost.toFixed(2)} MXN</td></tr>`;
-        tableBody.innerHTML += row;
-    }
+    // Mostrar utilidad como una línea separada
+    let utilityRow = `<tr><td>Utilidad</td><td>$${utilityCost.toFixed(2)} MXN</td></tr>`;
+    tableBody.innerHTML += utilityRow;
 
-    const activeYears = parseInt(document.getElementById('activeTime').value || 0);
-    const domainRequired = document.querySelector('input[name="domain"]:checked')?.value === 'no';
-    const hostingRequired = document.querySelector('input[name="hosting"]:checked')?.value === 'no';
-
-    if (hostingRequired) {
-        let hostingCost = hostingCostPerYear * activeYears;
-        totalCost += hostingCost;
-        let row = `<tr><td>Costo de Hosting (por ${activeYears} años)</td><td>$${hostingCost.toFixed(2)} MXN</td></tr>`;
-        tableBody.innerHTML += row;
-    }
-
-    if (domainRequired) {
-        let domainCostTotal = domainCost * activeYears; // Costo por los años activos
-        totalCost += domainCostTotal;
-        let row = `<tr><td>Costo de Dominio (por ${activeYears} años)</td><td>$${domainCostTotal.toFixed(2)} MXN</td></tr>`;
-        tableBody.innerHTML += row;
-    }
-
-    // Incluir costos de correos corporativos si es necesario
-    const requireCorporateEmails = document.getElementById('corporate_emails').checked;
-    if (requireCorporateEmails) {
-        let emailCost = corporateEmailCostPerYear * activeYears;
-        totalCost += emailCost;
-        let row = `<tr><td>Correos Corporativos (por ${activeYears} años)</td><td>$${emailCost.toFixed(2)} MXN</td></tr>`;
-        tableBody.innerHTML += row;
-    }
-    
-    const totalIVA = totalCost * (1 + IVA_RATE);
+    let totalIVA = totalCost * (1 + IVA_RATE);
     document.getElementById('quoteResult').textContent = totalCost.toFixed(2);
     document.getElementById('totalIVA').textContent = totalIVA.toFixed(2);
     document.getElementById('printSection').style.display = 'block';
 }
 
 function printDetails() {
+    calculateQuote();  // Asegurar que la cotización está actualizada.
+    let tableBody = document.querySelector('#detailsTable tbody');
+    let rows = Array.from(tableBody.querySelectorAll('tr'));
+    let totalCost = 0;
+    let utilityCost = 0;
+    let numEntries = rows.length - 1;  // Excluir la fila de utilidad.
+
+    rows.forEach(row => {
+        if (row.cells[0].textContent === 'Utilidad') {
+            utilityCost = parseFloat(row.cells[1].textContent.replace(/[^\d.-]/g, ''));
+            tableBody.removeChild(row);  // Eliminar la fila de utilidad visualmente.
+        } else {
+            let cost = parseFloat(row.cells[1].textContent.replace(/[^\d.-]/g, ''));
+            totalCost += cost;
+        }
+    });
+
+    // Redistribuir la utilidad equitativamente y actualizar las filas
+    let utilityPerEntry = utilityCost / numEntries;
+    rows.forEach(row => {
+        if (row.cells[0].textContent !== 'Utilidad') {
+            let cost = parseFloat(row.cells[1].textContent.replace(/[^\d.-]/g, '')) + utilityPerEntry;
+            row.cells[1].textContent = `$${cost.toFixed(2)} MXN`;
+            totalCost += utilityPerEntry;  // Añadir la parte proporcional de la utilidad al total.
+        }
+    });
+
+    let totalIVA = totalCost * (1 + IVA_RATE);
+    document.getElementById('quoteResult').textContent = `Total: $${totalCost.toFixed(2)} MXN`;
+    document.getElementById('totalIVA').textContent = `Total + IVA (16%): $${totalIVA.toFixed(2)} MXN`;
+
     window.print();
 }
+
+
 
 document.addEventListener("scroll", function() {
     const scrollTop = document.documentElement.scrollTop;
